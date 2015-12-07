@@ -1,0 +1,254 @@
+.jumbotron {
+	background-image: linear-gradient(rgba(0,0,0, 0.5), rgba(0,0,0,0.5)), url(isitlit_jumbotron_seafoam_faded.jpg);
+	height: 600px;
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+	font-family: Raleway, sans-serif;
+}
+
+
+#jumbotron-header {
+	font-size: 90px;
+	padding-top: 0px;
+	font-weight: 800;
+	color: white;
+}
+
+#jumbotron-text {
+	font-size: 40px;
+	font-weight: 400;
+	color: white;
+}
+
+.line {
+	width: 100px;
+  height: 5px;
+  background-color: white;
+  margin: 0 auto;
+}
+
+#emoji {
+	font-size: 60px;
+}
+
+#search-bar {
+	margin: 0 auto;
+	width: 100%;
+}
+
+.search-container {
+	margin-top: 160px;
+}
+
+.search-container .form-group {
+	width: 40%;
+}
+
+.edit-user-labels {
+	color: black;
+}
+
+#home-logo {
+	font-size: 40px;
+}
+
+#edit-user-style {
+	color: black;
+}
+
+#edit-review-profcolor {
+	color: white;
+	background-color: #1bccb5;
+}
+
+
+#profile-image {
+	max-width: 100%;
+	border-radius: 50%;
+}
+
+#profile-username {
+	font-size: 40px;
+	font-weight: 800;
+	line-height: 100%;
+	vertical-align: bottom;
+}
+
+#profile-username-container {
+	vertical-align: bottom;
+}
+
+
+
+.btn-info {
+	background-color: #1bccb5;
+	border: 1px solid #1bccb5;
+}
+
+.btn-info:hover {
+	background-color: #18b7a2;
+	border: 1px solid #18b7a2;
+}
+
+.review-box {
+	border: 3px solid #18b7a2;
+}
+
+.divider {
+	width: 50%;
+  height: 3px;
+  background-color: #1bccb5;
+	margin-top: 30px;
+	margin-left: -30px;
+}
+
+.profile-divider {
+	width: 50%;
+  height: 3px;
+  background-color: white;
+	margin-top: 30px;
+	margin-left: -20px;
+}
+
+#welcome-username {
+	font-weight: 600;
+	margin-top: 0px;
+}
+
+.background-img {
+	background-image: linear-gradient(rgba(0,0,0, 0.7), rgba(0,0,0,0.7)), url(isitlit_jumbotron_seafoam_faded.jpg);
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	color: white;
+}
+
+.profile .edit-review-profile {
+	color: white;
+
+}
+
+#artist-image {
+	max-width: 100%;
+	border-radius: 100%;
+}
+
+#artist-name {
+	font-weight: 800;
+	font-size: 40px;
+}
+
+.modal-title {
+	color: black;
+}
+
+.rating {
+	color: black;
+	margin: 0;
+}
+
+.modal {
+	color: black;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: left;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+/* =============================================================
+   GENERAL STYLES
+ ============================================================ */
+body {
+  font-family: 'Raleway', sans-serif;
+	letter-spacing:1px;
+	height: 100%;
+  /*color:#fff;*/ 
+}
+
+p {
+	padding:20px;
+	line-height:30px;
+  margin-bottom:35px;
+}
+
+section {
+	padding:50px 20px 25px 20px;
+}
+
+h2 {
+	font-size:60px;
+}
+
+hr {
+  border-top: 1px solid rgb(27, 106, 131);
+	margin: 0px 100px 0px 100px
+}
+
+/* =============================================================
+   NAVBAR STYLES
+ ============================================================ */
+.navbar-inverse {
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+	background-color: transparent;
+	border-bottom: 4px solid rgba(0, 231, 222, 0.72);
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: black;
+	font-size: 13px;
+	font-weight: 800;
+	padding: 10px;
+	letter-spacing: 2px;
+	margin:10px 5px 10px 5px;
+}
+
+.navbar-inverse .navbar-brand {
+	color: black;
+}
+
+.profile-buttons {
+	margin-bottom: 20px;
+}
+
+
+/* =============================================================
+   BUTTON STYLES
+ ============================================================ */
+
+.custom-btn-1 {
+  border-radius:0px;
+  background-color:transparent;
+  border:2px solid rgba(0, 231, 222, 0.72);
+  margin:5px;
+  color:#fff;
+}
+
+.custom-btn-1:hover {
+  color:#fff;
+  background-color:rgba(0, 0, 0,  0.42);
+}
+
+
+
+  /* =============================================================
+   FOOTER STYLES
+ ============================================================ */
+.footer {
+  text-align:right;
+  color:#fff;
+  background-color:rgb(27, 106, 131);
+  padding:20px;
+}

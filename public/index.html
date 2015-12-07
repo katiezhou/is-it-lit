@@ -1,0 +1,467 @@
+<html>
+<head>
+	<title>is it lit?</title>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+	<script type="text/javascript" src="https://cdn.rawgit.com/krisk/fuse/master/src/fuse.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,800,600,200' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style.css">
+	<script src="app.js"></script>
+
+
+</head>
+
+<body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top scrollclass" id="menu" >
+    <div class="container">
+      
+      <div class="navbar-collapse collapse">
+      	
+        <ul class="nav navbar-nav navbar-right">
+        	<li><a href="#" class="nav-links" id="home-button">HOME</a></li>
+          <li><a href="#" class="nav-links" id="signup-button">SIGN UP</a></li>
+          <li><a href="#" class="nav-links" id="signin-button">LOG IN</a></li>
+          <li><a href="#" class="nav-links" id="profile-link" style="display: none">PROFILE</a></li>
+          <li><a href="#" class="nav-links" id="signout" style="display: none">LOG OUT</a></li>
+        </ul>
+      </div>
+     
+    </div>
+  </div>
+
+
+
+  <div class="jumbotron">
+		<div class="header-text-container">
+			<h1 id="jumbotron-header">is it lit?</h1> 
+			<div class="line"></div>
+    	<p id="jumbotron-text">a lit-ness test for concerts you've attended.</p>
+    	<h1 id="emoji">&#128293;&#128293;&#128293;</h1> 
+		</div>
+
+		<!-- Search Bar -->
+
+		<div class="search-container">
+			<form class="navbar-form" role="search">
+			  <div class="form-group">
+			    <input type="text" class="form-control" placeholder="Search for an artist" id="search-bar">
+			  </div>
+			  <button type="submit" class="btn custom-btn-1" id="search-submit">SUBMIT</button>
+			</form>  
+		</div>
+
+  </div>
+  
+<!-- 	<button id="signup-button">Sign up!</button>
+	<button id="signin-button">Sign in!</button>
+	<button id="signout" style="display: none">Logout!</button>
+	<button id="new-review" style="display: none">New review!</button> -->
+
+
+	
+	
+
+	<!-- Containers -->
+
+	<div id="form-container"></div>
+	<div class="row user-container">
+		<div class="col-xs-1 col-sm-1 col-md-1"></div>
+		<div class="col-xs-11 col-sm-11 md-11" id="username-container"></div>
+	</div>
+	
+	<div id="profile-container">
+		
+			</div>
+		</div>
+	</div>
+
+		<div id="editUserModal" class="modal" role="dialog">
+  	<div class="modal-dialog">
+
+    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<button type="button" class="close close-edit-user" data-dismiss="modal">&times;</button>
+	        <h4 id="edit-user-style" class="modal-title">Edit your profile!</h4>
+	      </div>
+		  <div class="modal-body">
+		  <div id="edit-user-container"></div>
+	
+		<template id="edit-user-template">
+
+			<form id="edit-user-form">
+
+				<div class="form-group">
+				    <label class="edit-user-labels" for="exampleInputEmail1">Email address</label>
+				    <input type="email" class="form-control" id="edited-email" value="{{email}}">
+				 </div>
+
+				<div class="form-group">
+				    <label class="edit-user-labels" for="exampleInputEmail1">Username</label>
+				    <input type="text" class="form-control" id="edited-username" value="{{username}}">
+				</div>
+
+				<div class="form-group">
+				    <label class="edit-user-labels">Password</label>
+				    <input type="password" class="form-control" id="edited-password" value="">
+				</div>
+
+				<div class="form-group">
+				    <label class="edit-user-labels" for="exampleInputEmail1">Profile Picture</label>
+				    <input type="text" class="form-control" id="edited-profilePicture" value="{{image}}">
+				</div>
+
+				<button type="submit" class="btn btn-default" id="edit-user-submit">Submit</button>
+			</form>
+
+		</template>
+			</div>
+
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default close-edit-user" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+	
+
+
+	<div class="row reviews-wrapper">
+		<div class="col-xs-1 col-sm-1 col-md-1"></div>
+		<div class="col-xs-11 col-sm-11 col-md-11">
+			<div id="reviews-container"></div>
+		</div>
+	</div>
+	
+	<div id="artist-container">
+
+		<div class="row">
+			<div class="col-xs-1 col-sm-1 col-md-1"></div>
+			<div class="col-xs-11 col-sm-11 col-md-11"><h3>Concerts:</h3></div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-1 col-sm-1 col-md-1"></div>
+			<div class="col-xs-11 col-sm-11 col-md-11" id="concerts-container"></div>
+		</div>
+	</div>
+
+
+	<template id="artist-template">
+		<div id="artist-content">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12"><br></div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-1 col-sm-1 col-md-1"></div>
+				<div class="col-xs-11 col-sm-11 col-md-11"><h1>Artist Profile</h1></div>
+			</div>
+
+			<div id="artist" class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12"></div>
+				<div class="col-xs-1 col-sm-1 col-md-1"></div>
+			  <div class="col-xs-12 col-sm-2 col-md-2">
+			  	<img id="artist-image" src={{image_url}}>
+			 	</div>
+
+		  	<div id="artist-name-container" class="col-xs-12 col-sm-9 col-md-9">
+					<h3 id="artist-name"></h3>
+				</div>
+
+			</div>	
+		</div>
+		
+	</template>
+
+	<!--Sign up form -->
+
+	<div id="signupModal" class="modal" role="dialog">
+  	<div class="modal-dialog">
+
+    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close close-signup" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Sign up!</h4>
+	      </div>
+
+	      <div class="modal-body">
+	      	<div id="signup-container"></div>
+
+	        <template id="signup-form-template">
+
+						<form id="signup-form">
+
+							<div class="form-group">
+							    <label for="exampleInputEmail1">Email address</label>
+							    <input type="email" class="form-control" id="email" placeholder="Email">
+							 </div>
+
+							<div class="form-group">
+							    <label for="exampleInputEmail1">Username</label>
+							    <input type="text" class="form-control" id="username" placeholder="Username">
+							</div>
+
+							<div class="form-group">
+							    <label for="exampleInputPassword1">Password</label>
+							    <input type="password" class="form-control" id="password" placeholder="Password">
+							</div>
+
+							<div class="form-group">
+							    <label for="exampleInputEmail1">Profile Picture</label>
+							    <input type="text" class="form-control" id="profilePicture" placeholder="Image">
+							</div>
+
+							<button type="submit" class="btn btn-default" id="signup-submit">Submit</button>
+						</form>
+
+					</template>
+
+	      </div>
+
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default close-signup" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+
+
+	<!--Create review -->
+
+	<div id="createReviewModal" class="modal" role="dialog">
+  	<div class="modal-dialog">
+
+    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close close-create-review" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Write a review!</h4>
+	      </div>
+	      
+	      <div class="modal-body">
+	      	<div id="create-review-container"></div>
+	        <template id="review-form-template">
+
+						<form id="review-form">
+
+							<div class="form-group">
+							    <label for="stars">Stars:</label>
+							    <div class="rating" id="stars" name="stars" value="0">
+										<span class="5">☆</span><span class="4">☆</span><span class="3">☆</span><span class="2">☆</span><span class="1">☆</span>
+									</div>
+							    <!-- <input type="text" class="form-control" id="stars" name="stars" placeholder="Stars (out of 5)"> -->
+							 </div>
+
+							<div class="form-group">
+							    <label for="content">Content:</label>
+							   	<textarea class="form-control" rows="3" id="content" name="content" placeholder="How lit was it?"></textarea>
+							</div>
+
+							<button type="submit" class="btn btn-default" id="review-submit">Submit</button>
+						</form>
+
+					</template>
+
+	      </div>
+
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default close-create-review" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+
+
+	<!-- Sign in modal -->
+
+	<div id="signinModal" class="modal" role="dialog">
+  	<div class="modal-dialog">
+
+    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close close-signin" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Log in!</h4>
+	      </div>
+
+	      <div class="modal-body">
+	      	<div id="signin-container"></div>
+
+
+	        <template id="signin-form-template">
+
+						<form id="signin-form">
+
+							<div class="form-group">
+						    <label for="exampleInputEmail1">Email address</label>
+						    <input type="email" class="form-control" id="email" placeholder="Email">
+							</div>
+
+							<div class="form-group">
+						    <label for="exampleInputPassword1">Password</label>
+						    <input type="password" class="form-control" id="password" placeholder="Password">
+							</div>
+
+							<button type="submit" class="btn btn-default" id="signin-submit">Submit</button>
+						</form>
+
+					</template>
+
+
+	      </div>
+
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default close-signin" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+
+
+	<div id="editReviewModal" class="modal" role="dialog">
+  	<div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <div class="modal-header">
+	        <button type="button" class="close close-edit-review" data-dismiss="modal">&times;</button>
+	        <h4 id="edit-user-style" class="modal-title">Edit Review!</h4>
+	      </div>
+
+	<div class="modal-body">
+	  <div id="edit-review-container"></div>
+	
+		<template id="edit-review-template">
+
+			<form id="edit-review" data-id="{{_id}}" user-id="{{user_id}}">
+
+				<div class="form-group">
+				    <label class="edit-user-labels" for="stars">Stars:</label>
+				    <div class="rating" id="edit-stars" name="stars" value="0">
+							<span class="5">☆</span><span class="4">☆</span><span class="3">☆</span><span class="2">☆</span><span class="1">☆</span>
+						</div>
+				    <!-- <input type="text" class="form-control" id="edit-stars" name="stars" placeholder="Stars (out of 5)" value="{{stars}}"> -->
+				 </div>
+
+				<div class="form-group">
+				    <label class="edit-user-labels" for="content">Content:</label>
+				   	<textarea class="form-control" rows="3" id="edit-content" name="content" placeholder="How lit was it?">{{content}}</textarea>
+				</div>
+
+				<button type="submit" class="btn btn-default" id="edit-review-submit">Submit</button>
+			</form>
+
+		</template>
+
+	</div>
+	<div class="modal-footer">
+	   <button type="button" class="btn btn-default close-edit-review" data-dismiss="modal">Close</button>
+	</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!--List profile info -->
+
+		<template id="profile-compile-template">
+
+			<div class="profile-view">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						</br></br>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-1 col-sm-1 col-md-1"></div>
+					<h1 class="col-xs-11 col-sm-11 col-md-11">My Profile</h1>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-1 col-sm-1 col-md-1"></div>
+				  <div class="col-xs-12 col-sm-2 col-md-2">
+				  	<img id="profile-image" src={{image}}>
+				  </div>
+					<div id="profile-username-container" class="col-xs-12 col-sm-9 col-md-9">
+						<h3 id="profile-username">{{username}}</h3>
+					</div>
+					<div id="profile-buttons">
+						<button class="btn btn-info btn-lg" id="delete-user">Delete User</button>
+						<!-- Placeholder edit profile button-->
+						<button class="btn btn-info btn-lg" id="edit-profile">Edit Profile</button>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col-xs-1 col-sm-1 col-md-1"></div>
+					<div class="col-xs-11 col-sm-11 col-md-11">
+						<h3>My Reviews:</h3>
+					</div>
+					<div class="col-xs-1 col-sm-1 col-md-1"></div>
+					<div class="col-xs-11 col-sm-11 col-md-11">
+				    {{#each reviews}}
+				    <div class="profile-reviews" data-id="{{_id}}" user-id="{{user_id}}">
+				    	<h4>{{artist}} @ {{venue.name}}, {{datetime}}</h4>
+		          	{{ stars }} 
+		            <br>
+		          {{ content }}
+		          <div class="edit-review-profile">
+		         		<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 
+		          </div>
+		          <div class="profile-divider"></div>
+		          </div>
+		            <br>
+		        {{/each}}
+	        </div>
+				</div>
+			</div>
+		</template>
+
+	<!--List first 10 reviews -->
+
+		<template id="review-compile-template">
+			<div class="ten-reviews" data-id="{{_id}}" user-id="{{user_id}}">
+				<h3>{{artist}} @ {{venue.name}}, {{datetime}}</h3>
+				<h4>{{stars}}</h4>
+		    <h4>"{{content}}"</h4>
+		    <h5>- {{username}}</h5>
+		    <button type="button" class="btn btn-info btn-lg edit-review" data-toggle="modal" data-target="#editReviewModal">EDIT REVIEW</button>
+		    <button type="button" class="btn btn-info btn-lg delete-review">DELETE REVIEW</button>
+		    <div class="divider"></div>
+				
+			</div>
+		</template>
+
+
+	<template id="concert-template">
+		<div class="concert-container" data-id="{{id}}" datetime="{{datetime}}" artist="{{artists.0.name}}" venue-name="{{venue.name}}" venue-city="{{venue.city}}" venue-region="{{venue.region}}" venue-country="{{venue.country}}">
+			<h4>{{venue.name}}, {{venue.city}}, {{venue.region}}, {{venue.country}}, {{datetime}}</h4>
+			
+			<!-- <p class="create-review">CREATE REVIEW</p> -->
+			<button type="button" class="btn btn-info btn-lg create-review" data-toggle="modal" data-target="#createReviewModal">WRITE REVIEW</button>
+			<div class="divider"></div>
+		</div>
+</template>
+	
+
+
+</body>
+</html>
